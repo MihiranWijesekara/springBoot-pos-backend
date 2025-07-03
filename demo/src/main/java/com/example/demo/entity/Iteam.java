@@ -3,6 +3,7 @@ package com.example.demo.entity;
 import com.example.demo.entity.enums.MessuringUnitType;
 import com.vladmihalcea.hibernate.type.json.JsonType;
 import jakarta.persistence.*;
+import lombok.*;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
 
@@ -12,11 +13,17 @@ import org.hibernate.annotations.TypeDefs;
         @TypeDef(name = "json", typeClass = JsonType.class)
 })
 
+@AllArgsConstructor
+@NoArgsConstructor
+//@Getter
+//@Setter
+//@ToString
+@Data
 public class Iteam {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "iteam_id", length = 45)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int itemId;
 
     @Column(name = "item_name", length = 100, nullable = false)

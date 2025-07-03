@@ -106,8 +106,9 @@ public class CustomerServiceIMPL implements CustomerService {
     List <CustomerDTO> customerDTOList = new ArrayList<>();
 
     if(getCustomers != null) {
-            customerDTOList = modelMapper.map(getCustomers,new TypeToken<List<CustomerDTO>>() {
-    }.getType());
+        customerDTOList = modelMapper.
+                map(getCustomers, new TypeToken<List<CustomerDTO>>() {
+                }.getType());
       return customerDTOList;
     } else {
       return null;
