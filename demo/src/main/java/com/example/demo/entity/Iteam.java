@@ -15,9 +15,6 @@ import org.hibernate.annotations.TypeDefs;
 
 @AllArgsConstructor
 @NoArgsConstructor
-//@Getter
-//@Setter
-//@ToString
 @Data
 public class Iteam {
 
@@ -32,7 +29,7 @@ public class Iteam {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "measure_type", length = 25, nullable = false)
-    private MessuringUnitType messuringUnitType;
+    private MessuringUnitType messuringUnitType; // Must NOT be null
 
     @Column(name = "balance_qty", length = 50, nullable = false)
     private double balanceQty;
@@ -45,6 +42,23 @@ public class Iteam {
 
     @Column(name = "active_state", columnDefinition = "TINYINT default 1")
     private boolean activeState;
+
+
+    public int getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(int itemId) {
+        this.itemId = itemId;
+    }
+
+    public boolean isActiveState() {
+        return activeState;
+    }
+
+    public void setActiveState(boolean activeState) {
+        this.activeState = activeState;
+    }
 
 
 
