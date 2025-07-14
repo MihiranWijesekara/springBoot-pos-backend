@@ -3,7 +3,10 @@ package com.example.demo.controller;
 import com.example.demo.dto.IteamDTO;
 import com.example.demo.dto.request.RequestSaveIteamDTO;
 import com.example.demo.service.IteamService;
+import com.example.demo.util.StandardResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,8 +36,20 @@ public class IteamController {
     @GetMapping(
             path = {"/get-all-item"}
     )
-    public List <IteamDTO> getAllItems(){
-        List<IteamDTO> itemDTOS = iteamService.getAllItems();
-        return itemDTOS;
-    }
+    public ResponseEntity<StandardResponse> getAllItems() {
+        List<IteamDTO> iteamDTOS = iteamService.getAllItems();
+        if (iteamDTOS.isEmpty()) {
+            return new ResponseEntity<>(
+                    new StandardResponse(404, "No items found", null),
+                    HttpStatus.NOT_FOUND
+            );
+        }
+            return new ResponseEntity<>(
+                    new StandardResponse(200, "Success", iteamDTOS),
+                    HttpStatus.OK
+            );
+
+
+        }
+
 }
