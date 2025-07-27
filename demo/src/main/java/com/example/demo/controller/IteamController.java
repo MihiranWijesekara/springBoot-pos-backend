@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("/api/v1/iteam")
 @CrossOrigin
 
-public class IteamController {
+public class  IteamController {
     @Autowired
     private IteamService iteamService;
 
@@ -38,12 +38,12 @@ public class IteamController {
     )
     public ResponseEntity<StandardResponse> getAllItems() {
         List<IteamDTO> iteamDTOS = iteamService.getAllItems();
-        if (iteamDTOS.isEmpty()) {
-            return new ResponseEntity<>(
-                    new StandardResponse(404, "No items found", null),
-                    HttpStatus.NOT_FOUND
-            );
-        }
+//        if (iteamDTOS.isEmpty()) {
+//            return new ResponseEntity<>(
+//                    new StandardResponse(404, "No items found", null),
+//                    HttpStatus.NOT_FOUND
+//            );
+//        }
             return new ResponseEntity<>(
                     new StandardResponse(200, "Success", iteamDTOS),
                     HttpStatus.OK

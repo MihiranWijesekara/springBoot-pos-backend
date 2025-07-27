@@ -3,6 +3,7 @@ package com.example.demo.service.Impl;
 import com.example.demo.dto.IteamDTO;
 import com.example.demo.dto.request.RequestSaveIteamDTO;
 import com.example.demo.entity.Iteam;
+import com.example.demo.exception.NotFoundException;
 import com.example.demo.repo.IteamRepo;
 import com.example.demo.service.IteamService;
 import com.example.demo.util.mappers.ItemMapper;
@@ -45,8 +46,14 @@ public class IteamServiceIMPL implements IteamService {
 
     @Override
     public List<IteamDTO> getAllItems() {
-        List <Iteam> items = iteamRepo.findAll();
-        List<IteamDTO> iteamDTOS = itemMapper.entityListToDtoList(items);
-        return  iteamDTOS;
+        List<Iteam> items = iteamRepo.findAllByActiveStateIs( false);
+        if (items.size() > 0) {
+
+            List<IteamDTO> iteamDTOS = itemMapper.entityListToDtoList(items);
+            return iteamDTOS;
+        }
+        throw new NotFoundException("No data founds");
+
     }
+
 }

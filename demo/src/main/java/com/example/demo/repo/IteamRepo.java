@@ -12,5 +12,8 @@ import java.util.List;
 @Repository
 public interface IteamRepo extends JpaRepository<Iteam, Integer> {
     List<Iteam> findAllByItemNameIs(String itemName);
+
+    List<Iteam> findAllByActiveStateIs(boolean b);
+
 }
 
