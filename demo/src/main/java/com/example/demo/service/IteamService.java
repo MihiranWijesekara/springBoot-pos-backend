@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.IteamDTO;
+import com.example.demo.dto.paginated.PaginatedResponseItemDTO;
 import com.example.demo.dto.request.RequestSaveIteamDTO;
 import com.example.demo.repo.IteamRepo;
 import org.modelmapper.ModelMapper;
@@ -18,5 +19,6 @@ public interface IteamService {
 
     List<IteamDTO> getAllItems();
 
-    List<IteamDTO> getAllItemsActive();
+
+    PaginatedResponseItemDTO getAllItemsActive(int page, int size, boolean activeState);
 }

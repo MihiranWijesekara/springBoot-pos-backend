@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.IteamDTO;
+import com.example.demo.dto.paginated.PaginatedResponseItemDTO;
 import com.example.demo.dto.request.RequestSaveIteamDTO;
 import com.example.demo.service.IteamService;
 import com.example.demo.util.StandardResponse;
@@ -32,6 +33,14 @@ public class  IteamController {
         List<IteamDTO> iteamDTOList = iteamService.getIteamByName(itemName);
         return iteamDTOList;
     }
+    @GetMapping(path = "/get-all-items")
+    public ResponseEntity<StandardResponse> getAllItems() {
+        List<IteamDTO> iteamDTOList = iteamService.getAllItems();
+        return new ResponseEntity<StandardResponse>(
+                new StandardResponse(200, "Success", iteamDTOList),
+                HttpStatus.OK
+        );
+    }
 
     @GetMapping(
             path = {"/get-all-item-active"},
@@ -43,12 +52,14 @@ public class  IteamController {
             @RequestParam(value = "activeState") boolean activeState
     ) {
 
-        List<IteamDTO> iteamDTOS = iteamService.getAllItemsActive(page,size,activeState);
+        PaginatedResponseItemDTO paginatedResponseItemDTO = iteamService.getAllItemsActive(page,size,activeState);
         return new ResponseEntity<StandardResponse>(
-                new StandardResponse(200, "Success", iteamDTOS),
+                new StandardResponse(200, "Success", paginatedResponseItemDTO),
                 HttpStatus.OK
         );
 
 
     }
 }
+
+

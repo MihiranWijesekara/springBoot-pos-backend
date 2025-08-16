@@ -1,6 +1,7 @@
 package com.example.demo.service.Impl;
 
 import com.example.demo.dto.IteamDTO;
+import com.example.demo.dto.paginated.PaginatedResponseItemDTO;
 import com.example.demo.dto.request.RequestSaveIteamDTO;
 import com.example.demo.entity.Iteam;
 import com.example.demo.exception.NotFoundException;
@@ -9,6 +10,8 @@ import com.example.demo.service.IteamService;
 import com.example.demo.util.mappers.ItemMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -57,15 +60,16 @@ public class IteamServiceIMPL implements IteamService {
     }
 
     @Override
-    public List<IteamDTO> getAllItemsActive() {
-        List<Iteam> items = iteamRepo.findAllByActiveStateIs( false);
-        if (items.size() > 0) {
+    public PaginatedResponseItemDTO getAllItemsActive(int page, int size, boolean activeState) {
+        Page<Iteam> items = iteamRepo.findAllByActiveStateEquals(activeState, PageRequest.of(page, size));
+        List<IteamDTO> itemDTOS = itemMapper.pageToList(items);
 
-            List<IteamDTO> iteamDTOS = itemMapper.entityListToDtoList(items);
-            return iteamDTOS;
-        }
-        throw new NotFoundException("No data founds");
-
+        PaginatedResponseItemDTO paginatedResponseItemDTO = new PaginatedResponseItemDTO(
+                itemDTOS,
+                100,
+        );
+        return null;
     }
+
 
 }
