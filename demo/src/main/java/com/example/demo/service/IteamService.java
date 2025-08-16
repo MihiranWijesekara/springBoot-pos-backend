@@ -17,4 +17,6 @@ public interface IteamService {
     List<IteamDTO> getIteamByName(String itemName);
 
     List<IteamDTO> getAllItems();
+
+    List<IteamDTO> getAllItemsActive();
 }

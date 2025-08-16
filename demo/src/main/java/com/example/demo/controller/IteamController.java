@@ -34,22 +34,21 @@ public class  IteamController {
     }
 
     @GetMapping(
-            path = {"/get-all-item"}
+            path = {"/get-all-item-active"},
+            params = {"page", "size","activeState"}
     )
-    public ResponseEntity<StandardResponse> getAllItems() {
-        List<IteamDTO> iteamDTOS = iteamService.getAllItems();
-//        if (iteamDTOS.isEmpty()) {
-//            return new ResponseEntity<>(
-//                    new StandardResponse(404, "No items found", null),
-//                    HttpStatus.NOT_FOUND
-//            );
-//        }
-            return new ResponseEntity<>(
-                    new StandardResponse(200, "Success", iteamDTOS),
-                    HttpStatus.OK
-            );
+    public  ResponseEntity<StandardResponse> getAllItemsActive(
+            @RequestParam(value = "page") int page,
+            @RequestParam(value = "size")  int size,
+            @RequestParam(value = "activeState") boolean activeState
+    ) {
+
+        List<IteamDTO> iteamDTOS = iteamService.getAllItemsActive(page,size,activeState);
+        return new ResponseEntity<StandardResponse>(
+                new StandardResponse(200, "Success", iteamDTOS),
+                HttpStatus.OK
+        );
 
 
-        }
-
+    }
 }

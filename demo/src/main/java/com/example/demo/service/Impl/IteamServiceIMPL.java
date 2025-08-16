@@ -56,4 +56,16 @@ public class IteamServiceIMPL implements IteamService {
 
     }
 
+    @Override
+    public List<IteamDTO> getAllItemsActive() {
+        List<Iteam> items = iteamRepo.findAllByActiveStateIs( false);
+        if (items.size() > 0) {
+
+            List<IteamDTO> iteamDTOS = itemMapper.entityListToDtoList(items);
+            return iteamDTOS;
+        }
+        throw new NotFoundException("No data founds");
+
+    }
+
 }
