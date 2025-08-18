@@ -66,9 +66,9 @@ public class IteamServiceIMPL implements IteamService {
 
         PaginatedResponseItemDTO paginatedResponseItemDTO = new PaginatedResponseItemDTO(
                 itemDTOS,
-                100,
+                100
         );
-        return null;
+        return paginatedResponseItemDTO;
     }
 
 

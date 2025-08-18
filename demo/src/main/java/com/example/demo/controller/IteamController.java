@@ -5,6 +5,7 @@ import com.example.demo.dto.paginated.PaginatedResponseItemDTO;
 import com.example.demo.dto.request.RequestSaveIteamDTO;
 import com.example.demo.service.IteamService;
 import com.example.demo.util.StandardResponse;
+import jakarta.validation.constraints.Max;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,7 +49,7 @@ public class  IteamController {
     )
     public  ResponseEntity<StandardResponse> getAllItemsActive(
             @RequestParam(value = "page") int page,
-            @RequestParam(value = "size")  int size,
+            @RequestParam(value = "size") @Max(50) int size,
             @RequestParam(value = "activeState") boolean activeState
     ) {
 
